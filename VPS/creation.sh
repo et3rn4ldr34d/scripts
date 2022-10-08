@@ -2,7 +2,6 @@
 
 # Infrastructure
 ID='118213687'
-VMID=''
 VMNAME='Ein'
 IP='146.190.14.41'
 
@@ -11,25 +10,20 @@ GREEN='\033[1;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "[${RED}o${NC}] ${GREEN}Creating Droplet: ${NC} ${WHITE}${VMNAME}${NC}...";
-
-# Steps:
 # 1. Create DO Droplet from Snapshot | Wait until created to proceed
-
+echo -e "[${RED}o${NC}] ${GREEN}Creating Droplet: ${NC} ${WHITE}${VMNAME}${NC}...";
 doctl compute droplet create ${VMNAME} --image ${ID} --size s-2vcpu-2gb --region sfo3 --wait;
-echo -e "[${RED}o${NC}] ${GREEN}Finding ID${NC}...";
 
 #2. Find Droplet Information | Filter | Pass into Variable
-
-doctl compute droplet get Ein --format ID | tr -d "ID" | $VMID;
+echo -e "[${RED}o${NC}] ${GREEN}Finding ID${NC}...";
+VMID=$(doctl compute droplet get Ein --format ID | tr -d "ID");
 
 # 3. Assign Reserved IP to Droplet
-
-doctl compute reserved-ip-action assign ${IP} ${VMID};
 echo -e "[${RED}o${NC}] ${GREEN}Logging in${NC}...";
+doctl compute reserved-ip-action assign ${IP} ${VMID} &&
+sleep 10;
 
-# 3. Login to Droplet into SSH
-
-# ssh root@${IP}; # test
+# 4. Login to Droplet into SSH
+ssh root@${IP}; # test
 # ssh -L 59000:localhost:5901 -C -N -l root ${IP};
-echo -e "[${GREEN}o${NC}] ${GREEN}Connected."${NC}
+echo -e "[${GREEN}o${NC}] ${GREEN}Connected${NC}."

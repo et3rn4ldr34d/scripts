@@ -14,20 +14,17 @@ NC='\033[0m' # No Color
 echo -e "[${RED}-${NC}] ${GREEN}Copying Files..."${NC};
 
 # Steps:
-# 1. Export files to local
+# 1. Export files to local storage
 
 # scp username@b:/path/to/file /path/to/destination;
-# Copy Files
 echo -e "[${RED}-${NC}] ${GREEN}Creating Snapshot..."${NC};
 
-# 2. Create Snapshot
+# 2. Create Snapshot | Wait for Completion before next command
 
 # doctl compute droplet-action snapshot ${ID} --wait;
-# Creates Snapshot | Waits for Completion before next command
 echo -e "[${RED}-${NC}] ${GREEN}Destroying Droplet:${NC} ${WHITE}${NAME} ..."${NC};
 
 # 3. Destroys Droplet
 
-doctl compute droplet delete ${NAME} -fv;
-# Destroys Droplet | -force -verbose
+doctl compute droplet delete ${NAME} -f; # -force
 echo -e "[${GREEN}o${NC}] ${GREEN}Complete."${NC}

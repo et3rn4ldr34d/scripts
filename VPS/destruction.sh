@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Infrastructure
-ID='118213687'
-NAME='Ein'
-IP='146.190.14.41'
+ID=''
+NAME=''
+IP=''
 
 # Colors
 WHITE='\033[1;37m'

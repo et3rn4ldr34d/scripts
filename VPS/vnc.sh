@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Infrastructure
-VMNAME='Ein'
-ID='118213687'
-IP='146.190.14.41'
-SIZE='s-2vcpu-2gb'
-REGION='sfo3'
+VMNAME=''
+ID=''
+IP=''
+SIZE=''
+REGION=''
 
 # Colors
 WHITE='\033[1;37m'
